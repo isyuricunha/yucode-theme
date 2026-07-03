@@ -4,7 +4,7 @@
 [![Hermes Agent](https://img.shields.io/badge/for-Hermes%20Agent-D9834F)](https://github.com/NousResearch/hermes-agent)
 [![install.sh](https://img.shields.io/badge/install-install.sh-87C38F)](install.sh)
 
-A minimal skin for [Hermes Agent](https://github.com/NousResearch/hermes-agent)'s CLI, styled after Claude Code's terminal look — coral accent, neutral grays, no rainbow diff colors fighting each other, and a small custom logo/banner instead of the default mascot art.
+A minimal skin for [Hermes Agent](https://github.com/NousResearch/hermes-agent)'s CLI, styled after Claude Code's terminal look - coral accent, neutral grays, no rainbow diff colors fighting each other, and a small custom logo/banner instead of the default mascot art.
 
 The default Hermes output can get noisy: lots of red/green diff blocks and stacked progress comments. **yucode** fixes the colors and branding, and the install script flips a few display settings (compact, new tool progress) and switches the default interface to the TUI, which renders user/agent messages far more evenly than the classic CLI.
 
@@ -15,7 +15,7 @@ The default Hermes output can get noisy: lots of red/green diff blocks and stack
 - [Files](#files)
 - [Requirements](#requirements)
 - [The scripts](#the-scripts)
-- [Manual mais rápido (EOF)](#manual-mais-rápido-eof)
+- [Quick install (EOF)](#quick-install-eof)
 - [Standard install](#standard-install)
 - [Manual install](#manual-install)
 - [Customizing](#customizing)
@@ -30,7 +30,7 @@ The default Hermes output can get noisy: lots of red/green diff blocks and stack
 |---|---|
 | [`yucode.yaml`](yucode.yaml) | The skin file itself. Drop it into `~/.hermes/skins/` and reference it as `display.skin: yucode`. |
 | [`install.sh`](install.sh) | Installer: copies the skin, applies the display settings, and sets the TUI as the default interface. |
-| [`EOF.md`](EOF.md) | The "manual mais rápido" — a single copy-paste block that drops the skin into place without cloning the repo. |
+| [`EOF.md`](EOF.md) | The "quick install" - a single copy-paste block that drops the skin into place without cloning the repo. |
 | [`LICENSE`](LICENSE) | AGPL-3.0. |
 
 ## Requirements
@@ -49,21 +49,21 @@ The recommended path. Run it from the repo directory:
 
 It does five things, in order:
 
-1. **Cleans stale skins** — removes any `yucode.yaml` under `~/.hermes/skins/`, including case variants like `YuCode.yaml`. Hermes gets confused if two files with the same name in different casing sit side by side.
-2. **Installs the skin** — copies `yucode.yaml` into `~/.hermes/skins/`.
-3. **Backs up config** — timestamped copy of `~/.hermes/config.yaml` (`.bak.<YYYYMMDD_HHMMSS>`), so the previous state is always recoverable.
-4. **Applies display settings** — sets `display.skin: yucode`, `display.compact: true`, and `display.tool_progress: new`. These cut down the diff/patch noise.
-5. **Flips the interface** — sets `display.interface: tui`, so a bare `hermes` launches the modern TUI instead of the classic REPL.
+1. **Cleans stale skins** - removes any `yucode.yaml` under `~/.hermes/skins/`, including case variants like `YuCode.yaml`. Hermes gets confused if two files with the same name in different casing sit side by side.
+2. **Installs the skin** - copies `yucode.yaml` into `~/.hermes/skins/`.
+3. **Backs up config** - timestamped copy of `~/.hermes/config.yaml` (`.bak.<YYYYMMDD_HHMMSS>`), so the previous state is always recoverable.
+4. **Applies display settings** - sets `display.skin: yucode`, `display.compact: true`, and `display.tool_progress: new`. These cut down the diff/patch noise.
+5. **Flips the interface** - sets `display.interface: tui`, so a bare `hermes` launches the modern TUI instead of the classic REPL.
 
-`set -euo pipefail` is on, so the script aborts on the first error. It never deletes the config — only backs it up and patches keys with `sed`.
+`set -euo pipefail` is on, so the script aborts on the first error. It never deletes the config - only backs it up and patches keys with `sed`.
 
 ### `EOF.md`
 
-Not a script, but a single self-contained shell block (`cat … << 'EOF'`) that writes the skin straight into `~/.hermes/skins/yucode.yaml` without cloning anything. Useful for a fast, throw-free apply on a remote box, or when you already have the display settings the way you want them and only need the file. See [Manual mais rápido (EOF)](#manual-mais-rápido-eof) below.
+Not a script, but a single self-contained shell block (`cat ... << 'EOF'`) that writes the skin straight into `~/.hermes/skins/yucode.yaml` without cloning anything. Useful for a fast, throw-free apply on a remote box, or when you already have the display settings the way you want them and only need the file. See [Quick install (EOF)](#quick-install-eof) below.
 
-## Manual mais rápido (EOF)
+## Quick install (EOF)
 
-O caminho sem clone, sem script — só um bloco de shell que cria o arquivo no lugar. Bom para máquinas remotas ou quando você já configurou o resto do `~/.hermes/config.yaml` e só quer o skin pronto.
+The no-clone, no-script path - just a shell block that writes the file into place. Good for remote machines or when the rest of `~/.hermes/config.yaml` is already configured and you only want the skin ready to go.
 
 ```bash
 mkdir -p ~/.hermes/skins
@@ -125,7 +125,7 @@ banner_hero: |
 EOF
 ```
 
-Depois, aponte o Hermes para ele. Em uma sessão: `/skin yucode`. Ou edite `~/.hermes/config.yaml`:
+Then point Hermes at it. In a session: `/skin yucode`. Or edit `~/.hermes/config.yaml`:
 
 ```yaml
 display:
@@ -133,7 +133,7 @@ display:
   interface: tui
 ```
 
-Saia e rode `hermes` de novo. O TUI pega as cores na hora; o banner do CLI clássico só atualiza no próximo start. O conteúdo completo do bloco acima também vive em [`EOF.md`](EOF.md) — o "manual mais rápido" do repositório.
+Exit and run `hermes` again. The TUI picks up the colors immediately; the classic CLI banner only refreshes on next start. The full content of the block above also lives in [`EOF.md`](EOF.md) - the repo's quick-install reference.
 
 ## Standard install
 
@@ -170,7 +170,7 @@ All keys inherit from the built-in `default` skin, so you only need to override 
 
 ## Color palette
 
-The palette is intentionally tight — one accent (coral), a secondary accent for the lower half of the banner, muted gray for labels, and dark grays for borders/backgrounds. No pure white, no pure black.
+The palette is intentionally tight - one accent (coral), a secondary accent for the lower half of the banner, muted gray for labels, and dark grays for borders/backgrounds. No pure white, no pure black.
 
 | Purpose | Key | Color |
 |---|---|---|
@@ -190,7 +190,7 @@ The palette is intentionally tight — one accent (coral), a secondary accent fo
 - `banner_logo` replaces the big block-letter "HERMES-AGENT" title with a small coral `YuCode` wordmark.
 - `banner_hero` replaces the default caduceus mascot art with a compact block-style `Y`.
 
-Both support Rich console markup, so each line can carry its own color tag (`[bold #C15F3C]…[/]`, `[dim #6B6B6B]…[/]`).
+Both support Rich console markup, so each line can carry its own color tag (`[bold #C15F3C]...[/]`, `[dim #6B6B6B]...[/]`).
 
 ## Uninstall
 
