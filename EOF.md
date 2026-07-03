@@ -3,7 +3,7 @@
 ```bash
 cat > ~/.hermes/skins/yucode.yaml << 'EOF'
 name: YuCode
-description: Minimal, coral-accented theme inspired by Claude Code's terminal aesthetic
+description: Minimal, Code's terminal aesthetic
 
 colors:
   banner_border: "#C15F3C"
