@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # install.sh
-# Installs the yucode skin for Hermes Agent and applies my preferred display settings.
+# Installs the yucode skin for Hermes Agent, applies my preferred display
+# settings, and sets the TUI as the default interface.
 # Run this from the same directory as yucode.yaml.
 
 set -euo pipefail
@@ -40,7 +41,14 @@ sed -i 's/^\(\s*compact:\s*\).*/\1true/' "$CONFIG_FILE"
 echo "setting tool_progress to new"
 sed -i 's/^\(\s*tool_progress:\s*\).*/\1new/' "$CONFIG_FILE"
 
+echo "setting the TUI as the default interface"
+if grep -q "^\s*interface:" "$CONFIG_FILE"; then
+    sed -i 's/^\(\s*interface:\s*\).*/\1tui/' "$CONFIG_FILE"
+else
+    sed -i '/^display:/a\  interface: tui' "$CONFIG_FILE"
+fi
+
 echo ""
-echo "done. yucode is installed."
-echo "start a fresh session (exit and run hermes again) so the banner colors pick it up too."
-echo "or run /skin yucode inside an active session for an instant preview of prompt and TUI colors."
+echo "done. yucode is installed and the TUI is now the default interface."
+echo "start a fresh session (exit and run hermes again) to see everything applied."
+echo "run hermes --cli for a one-off classic CLI session if you ever need it."

@@ -46,3 +46,14 @@ branding:
 
 wings:
   - ["", ""]
+
+banner_logo: |
+  [bold #D97757]YuCode[/]
+
+banner_hero: |
+  [bold #D97757]██╗   ██╗[/]
+  [bold #D97757]╚██╗ ██╔╝[/]
+  [bold #E8A87C] ╚████╔╝ [/]
+  [bold #E8A87C]  ╚██╔╝  [/]
+  [dim #6B6B6B]   ██║   [/]
+  [dim #6B6B6B]   ╚═╝   [/]
