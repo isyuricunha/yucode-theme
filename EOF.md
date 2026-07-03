@@ -1,6 +1,11 @@
-# EOF for fast-apply
+# EOF — manual mais rápido
+
+O caminho sem clone, sem script: um único bloco de shell que cria `yucode.yaml` direto no lugar. Útil em máquinas remotas, ou quando o `~/.hermes/config.yaml` já está do jeito que você quer e só falta o skin.
+
+## 1. Drop the skin
 
 ```bash
+mkdir -p ~/.hermes/skins
 cat > ~/.hermes/skins/yucode.yaml << 'EOF'
 name: YuCode
 description: Minimal, Code's terminal aesthetic
@@ -86,9 +91,36 @@ banner_hero: |
 EOF
 ```
 
-## now
+## 2. Aponte o Hermes para ele
+
+Em uma sessão rodando:
+
+```
+/skin yucode
+```
+
+Ou edite `~/.hermes/config.yaml`:
+
+```yaml
+display:
+  skin: yucode
+  interface: tui
+```
+
+## 3. Reinicie
 
 ```bash
 /exit
 hermes
 ```
+
+O TUI pega as cores na hora. O banner do CLI clássico só atualiza no próximo start. Para uma sessão avulsa no CLI clássico: `hermes --cli`.
+
+---
+
+## Quando usar isso
+
+- **EOF (este arquivo)** — só o skin, sem mais nada. Bom quando o `config.yaml` já está configurado e você quer só o arquivo parado no lugar. Rápido, sem dependência do repo.
+- **`install.sh`** — o skin **e** as display settings (`skin`, `compact: true`, `tool_progress: new`, `interface: tui`) aplicadas de uma vez, com backup do `config.yaml`. Bom para a primeira instalação ou quando se quer o setup completo.
+
+O conteúdo do bloco acima é idêntico ao de [`yucode.yaml`](yucode.yaml). Se preferir copiar do arquivo, veja o [README](README.md) para o caminho com `install.sh`.
