@@ -1,3 +1,5 @@
+# EOF for fast-apply
+
 ```bash
 cat > ~/.hermes/skins/yucode.yaml << 'EOF'
 name: YuCode
@@ -82,4 +84,11 @@ banner_hero: |
   [dim #6B6B6B]   ██║   [/]
   [dim #6B6B6B]   ╚═╝   [/]
 EOF
+```
+
+## now
+
+```bash
+/exit
+hermes
 ```
