@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # install.sh
-# Installs the yucode skin for Hermes Agent, applies my preferred display
+# Installs the yucode skin for Hermes Agent, applies the recommended display
 # settings, and sets the TUI as the default interface.
 # Run this from the same directory as yucode.yaml.
 
@@ -20,7 +20,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
     exit 1
 fi
 
-echo "removing any stale yucode skin files (case mismatches included)"
+echo "removing any stale yucode skin files (case-insensitive)"
 find "$HOME/.hermes/skins" -maxdepth 1 -iname "yucode.yaml" -delete 2>/dev/null || true
 
 echo "creating skins directory"
