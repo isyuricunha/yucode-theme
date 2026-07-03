@@ -2,7 +2,7 @@
 
 ```bash
 cat > ~/.hermes/skins/yucode.yaml << 'EOF'
-name: YuCode
+name: yucode
 description: Minimal, Code's terminal aesthetic
 
 colors:
@@ -40,6 +40,9 @@ colors:
   completion_menu_meta_current_bg: "#2C2C2C"
 
 spinner:
+  waiting_faces: ["", ""]
+  thinking_faces: ["", ""]
+
   waiting_verbs:
     [
       "vibing",
@@ -66,9 +69,9 @@ spinner:
     ]
 
 branding:
-  agent_name: "YuCode"
+  agent_name: " YuCode "
   response_label: " ● YuCode "
-  tool_prefix: "●"
+  tool_prefix: " ● "
 
 wings:
   - ["", ""]
