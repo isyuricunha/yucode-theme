@@ -1,6 +1,6 @@
-# EOF — manual mais rápido
+# EOF - quick install
 
-O caminho sem clone, sem script: um único bloco de shell que cria `yucode.yaml` direto no lugar. Útil em máquinas remotas, ou quando o `~/.hermes/config.yaml` já está do jeito que você quer e só falta o skin.
+The no-clone, no-script path: a single shell block that writes `yucode.yaml` straight into place. Useful on remote boxes, or when `~/.hermes/config.yaml` is already set up the way you want and you just need the skin file.
 
 ## 1. Drop the skin
 
@@ -91,15 +91,15 @@ banner_hero: |
 EOF
 ```
 
-## 2. Aponte o Hermes para ele
+## 2. Point Hermes at it
 
-Em uma sessão rodando:
+In a running session:
 
 ```
 /skin yucode
 ```
 
-Ou edite `~/.hermes/config.yaml`:
+Or edit `~/.hermes/config.yaml`:
 
 ```yaml
 display:
@@ -107,20 +107,20 @@ display:
   interface: tui
 ```
 
-## 3. Reinicie
+## 3. Restart
 
 ```bash
 /exit
 hermes
 ```
 
-O TUI pega as cores na hora. O banner do CLI clássico só atualiza no próximo start. Para uma sessão avulsa no CLI clássico: `hermes --cli`.
+The TUI picks up the colors immediately. The classic CLI banner only refreshes on next start. For a one-off classic CLI session: `hermes --cli`.
 
 ---
 
-## Quando usar isso
+## When to use this
 
-- **EOF (este arquivo)** — só o skin, sem mais nada. Bom quando o `config.yaml` já está configurado e você quer só o arquivo parado no lugar. Rápido, sem dependência do repo.
-- **`install.sh`** — o skin **e** as display settings (`skin`, `compact: true`, `tool_progress: new`, `interface: tui`) aplicadas de uma vez, com backup do `config.yaml`. Bom para a primeira instalação ou quando se quer o setup completo.
+- **EOF (this file)** - just the skin, nothing else. Good when `config.yaml` is already configured and you only need the file dropped into place. Fast, no repo dependency.
+- **`install.sh`** - the skin **and** the display settings (`skin`, `compact: true`, `tool_progress: new`, `interface: tui`) applied at once, with a backup of `config.yaml`. Good for first install or when you want the full setup.
 
-O conteúdo do bloco acima é idêntico ao de [`yucode.yaml`](yucode.yaml). Se preferir copiar do arquivo, veja o [README](README.md) para o caminho com `install.sh`.
+The content of the block above is identical to [`yucode.yaml`](yucode.yaml). If you prefer to copy from the file, see the [README](README.md) for the `install.sh` path.
