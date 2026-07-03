@@ -1,0 +1,48 @@
+name: yucode
+description: Minimal, coral-accented theme inspired by Claude Code's terminal aesthetic
+
+colors:
+  banner_border: "#D97757"
+  banner_title: "#D97757"
+  banner_accent: "#E8A87C"
+  banner_dim: "#6B6B6B"
+  banner_text: "#D4D4D4"
+
+  ui_accent: "#D97757"
+  ui_label: "#8C8C8C"
+  ui_ok: "#87C38F"
+  ui_error: "#E5707E"
+  ui_warn: "#D9A066"
+
+  prompt: "#D4D4D4"
+  input_rule: "#4A4A4A"
+
+  response_border: "#4A4A4A"
+  response_text: "#D4D4D4"
+
+  session_label: "#D97757"
+  session_border: "#3A3A3A"
+
+  reasoning_border: "#4A4A4A"
+  reasoning_text: "#8C8C8C"
+
+  status_bar_bg: "#1E1E1E"
+  voice_status_bg: "#1E1E1E"
+  selection_bg: "#3A3A3A"
+
+  completion_menu_bg: "#1E1E1E"
+  completion_menu_current_bg: "#D97757"
+  completion_menu_meta_bg: "#1E1E1E"
+  completion_menu_meta_current_bg: "#3A3A3A"
+
+spinner:
+  waiting_verbs: ["thinking", "working", "reasoning"]
+  thinking_verbs: ["reading", "editing", "running", "reviewing"]
+
+branding:
+  agent_name: "yucode"
+  response_label: " ● yucode "
+  tool_prefix: "●"
+
+wings:
+  - ["", ""]
