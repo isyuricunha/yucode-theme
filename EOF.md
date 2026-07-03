@@ -35,9 +35,9 @@ colors:
   selection_bg: "#8B4530"
 
   completion_menu_bg: "#1E1E1E"
-  completion_menu_current_bg: "#8B4530"
+  completion_menu_current_bg: "#3A3A3A"
   completion_menu_meta_bg: "#1E1E1E"
-  completion_menu_meta_current_bg: "#5A2E20"
+  completion_menu_meta_current_bg: "#2C2C2C"
 
 spinner:
   waiting_verbs:
