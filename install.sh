@@ -34,20 +34,22 @@ cp "$CONFIG_FILE" "${CONFIG_FILE}.bak.$(date +%Y%m%d_%H%M%S)"
 if command -v hermes >/dev/null 2>&1 && hermes config set display.skin yucode >/dev/null 2>&1; then
     echo "applying Claude-like TUI settings"
     hermes config set display.compact true >/dev/null
-    hermes config set display.tool_progress new >/dev/null
     hermes config set display.interface tui >/dev/null
 
-    # Claude Code does not show Hermes' reasoning accordion/recap by default.
-    hermes config set display.show_reasoning false >/dev/null
-    hermes config set display.sections.thinking hidden >/dev/null
+    # Keep real reasoning and tool calls in the chat, but collapse both sections
+    # so the transcript stays compact. "all" keeps every tool lifecycle event;
+    # the TUI accordion controls the visual density instead of "new" mode.
+    hermes config set display.show_reasoning true >/dev/null
+    hermes config set display.tool_progress all >/dev/null
+    hermes config set display.sections.thinking collapsed >/dev/null
+    hermes config set display.sections.tools collapsed >/dev/null
 
     # Replace the default kawaii face + rotating verb with the quiet braille
-    # spinner. The unicode style intentionally has no verb text.
+    # spinner. The unicode style intentionally has no face or verb text.
     hermes config set display.tui_status_indicator unicode >/dev/null
 else
     echo "warning: 'hermes config set' is unavailable; applying compatible settings with sed"
 
-    # Existing flat keys: replace when present, otherwise add directly under display:.
     set_display_key() {
         local key="$1" value="$2"
         if grep -Eq "^[[:space:]]{2}${key}:" "$CONFIG_FILE"; then
@@ -57,27 +59,30 @@ else
         fi
     }
 
+    set_section_key() {
+        local key="$1" value="$2"
+        if ! grep -Eq '^  sections:' "$CONFIG_FILE"; then
+            sed -i '/^display:/a\  sections:' "$CONFIG_FILE"
+        fi
+        if grep -Eq "^[[:space:]]{4}${key}:" "$CONFIG_FILE"; then
+            sed -i -E "s|^([[:space:]]{4}${key}:[[:space:]]*).*|\\1${value}|" "$CONFIG_FILE"
+        else
+            sed -i "/^  sections:/a\\    ${key}: ${value}" "$CONFIG_FILE"
+        fi
+    }
+
     set_display_key skin yucode
     set_display_key compact true
-    set_display_key tool_progress new
     set_display_key interface tui
-    set_display_key show_reasoning false
+    set_display_key show_reasoning true
+    set_display_key tool_progress all
     set_display_key tui_status_indicator unicode
-
-    # TUI section override: hide the reasoning accordion completely.
-    if grep -Eq '^  sections:' "$CONFIG_FILE"; then
-        if grep -Eq '^    thinking:' "$CONFIG_FILE"; then
-            sed -i -E 's|^([[:space:]]{4}thinking:[[:space:]]*).*|\1hidden|' "$CONFIG_FILE"
-        else
-            sed -i '/^  sections:/a\    thinking: hidden' "$CONFIG_FILE"
-        fi
-    else
-        sed -i '/^display:/a\  sections:\n    thinking: hidden' "$CONFIG_FILE"
-    fi
+    set_section_key thinking collapsed
+    set_section_key tools collapsed
 fi
 
 echo ""
-echo "done. yucode is installed with Claude-like colors and TUI behavior."
-echo "thinking panels are hidden and the kawaii status indicator is replaced by unicode."
+echo "done. yucode is installed with Claude-like colors and compact TUI behavior."
+echo "thinking and tool calls stay visible in-chat, collapsed by default; kawaii faces/verbs are disabled."
 echo "start a fresh Hermes session to see everything applied."
 echo "run hermes --cli for a one-off classic CLI session if you ever need it."
