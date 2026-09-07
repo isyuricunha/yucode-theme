@@ -10,7 +10,7 @@ colors:
   banner_title: "#D77757"        # Claude brand accent
   banner_accent: "#D77757"       # Claude brand accent
   banner_dim: "#999999"          # Claude inactive
-  banner_text: "#FFFFFF"         # Claude text
+  banner_text: "#CCCCCC"         # Claude assistant/default terminal text on this profile
 
   # General UI
   ui_accent: "#D77757"           # Claude
@@ -20,10 +20,10 @@ colors:
   ui_warn: "#FFC107"             # warning
 
   # Prompt / responses
-  prompt: "#FFFFFF"              # text
+  prompt: "#FFFFFF"              # user/input text
   input_rule: "#888888"          # promptBorder
   response_border: "#505050"     # subtle
-  response_text: "#FFFFFF"       # kept for Hermes versions that consume it
+  response_text: "#CCCCCC"       # Claude assistant body text
 
   # Session / reasoning
   session_label: "#D77757"
