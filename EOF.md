@@ -1,129 +1,155 @@
-# EOF - quick install
+# EOF — quick install
 
-The no-clone, no-script path: a single shell block that writes `yucode.yaml` straight into place. Useful on remote boxes, or when `~/.hermes/config.yaml` is already set up the way you want and you just need the skin file.
+No clone required. This writes the current YuCode skin directly to `~/.hermes/skins/yucode.yaml` and then applies the recommended Hermes TUI settings.
 
 ## 1. Drop the skin
 
 ```bash
 mkdir -p ~/.hermes/skins
 cat > ~/.hermes/skins/yucode.yaml << 'EOF'
-name: yucode
-description: Minimal, Code's terminal aesthetic
+name: YuCode
+description: Minimal, Claude Code's dark terminal aesthetic
 
+# Claude Code dark-theme colors mapped onto Hermes' skin tokens.
+# Claude Code does not own the terminal background itself, so surface colors
+# below are chosen to blend with the same dark terminal profile used by YuCode.
 colors:
-  banner_border: "#C15F3C"
-  banner_title: "#C15F3C"
-  banner_accent: "#D9834F"
-  banner_dim: "#6B6B6B"
-  banner_text: "#D4D4D4"
+  # Startup banner
+  banner_border: "#505050"       # Claude subtle
+  banner_title: "#D77757"        # Claude brand accent
+  banner_accent: "#D77757"       # Claude brand accent
+  banner_dim: "#999999"          # Claude inactive
+  banner_text: "#CCCCCC"         # Claude assistant/default terminal text on this profile
 
-  ui_accent: "#C15F3C"
-  ui_label: "#8C8C8C"
-  ui_ok: "#87C38F"
-  ui_error: "#E50000"
-  ui_warn: "#D9A066"
+  # General UI
+  ui_accent: "#D77757"           # Claude
+  ui_label: "#999999"            # inactive
+  ui_ok: "#4EBA65"               # success
+  ui_error: "#FF6B80"            # error
+  ui_warn: "#FFC107"             # warning
 
-  prompt: "#D4D4D4"
-  input_rule: "#4A4A4A"
+  # Prompt / responses
+  prompt: "#FFFFFF"              # user/input text
+  input_rule: "#888888"          # promptBorder
+  response_border: "#505050"     # subtle
+  response_text: "#CCCCCC"       # Claude assistant body text
 
-  response_border: "#4A4A4A"
-  response_text: "#D4D4D4"
+  # Session / reasoning
+  session_label: "#D77757"
+  session_border: "#505050"
+  reasoning_border: "#505050"    # kept for Hermes versions that consume it
+  reasoning_text: "#999999"      # inactive
 
-  session_label: "#C15F3C"
-  session_border: "#3A3A3A"
+  # Status bar
+  status_bar_bg: "#0C0C0C"
+  status_bar_text: "#999999"
+  status_bar_strong: "#FFFFFF"
+  status_bar_dim: "#505050"
+  status_bar_good: "#4EBA65"
+  status_bar_warn: "#FFC107"
+  status_bar_bad: "#FF6B80"
+  status_bar_critical: "#FF6B80"
+  voice_status_bg: "#0C0C0C"
 
-  reasoning_border: "#4A4A4A"
-  reasoning_text: "#8C8C8C"
+  # Selection / menus
+  selection_bg: "#264F78"        # Claude selectionBg
+  completion_menu_bg: "#0C0C0C"
+  completion_menu_current_bg: "#373737"       # userMessageBackground
+  completion_menu_meta_bg: "#0C0C0C"
+  completion_menu_meta_current_bg: "#464646"  # userMessageBackgroundHover
 
-  status_bar_bg: "#1E1E1E"
-  voice_status_bg: "#1E1E1E"
-  selection_bg: "#8B4530"
+  # Shell/tool accent
+  shell_dollar: "#FD5DB1"        # Claude bashBorder
 
-  completion_menu_bg: "#1E1E1E"
-  completion_menu_current_bg: "#3A3A3A"
-  completion_menu_meta_bg: "#1E1E1E"
-  completion_menu_meta_current_bg: "#2C2C2C"
-
+# Keep Hermes' live activity indicator, but remove the kawaii faces and
+# novelty phrases. Non-empty blank entries avoid falling back to Hermes defaults.
 spinner:
-  waiting_faces: ["", ""]
-  thinking_faces: ["", ""]
-
-  waiting_verbs:
-    [
-      "vibing",
-      "sacrificing RAM",
-      "summoning Stack Overflow",
-      "asking the rubber duck",
-      "waiting for CI",
-      "petting the server",
-      "warming quantum bits",
-      "thinking",
-    ]
-
-  thinking_verbs:
-    [
-      "grep'ing the universe",
-      "chasing null pointers",
-      "compressing brainwaves",
-      "reading docs (finally)",
-      "rewriting history",
-      "executing side quests",
-      "optimizing bad decisions",
-      "running benchmarks",
-      "debugging reality",
-    ]
+  waiting_faces: [""]
+  thinking_faces: [""]
+  waiting_verbs: [""]
+  thinking_verbs: [""]
+  wings:
+    - ["", ""]
 
 branding:
-  agent_name: " YuCode "
+  agent_name: "YuCode"
   response_label: " ● YuCode "
-  tool_prefix: " ● "
+  prompt_symbol: "❯"
 
-wings:
-  - ["", ""]
+tool_prefix: "●"
 
 banner_logo: |
-  [bold #C15F3C]YuCode[/]
+  [bold #D77757]YuCode[/]
 
 banner_hero: |
-  [bold #C15F3C]██╗   ██╗[/]
-  [bold #C15F3C]╚██╗ ██╔╝[/]
-  [bold #D9834F] ╚████╔╝ [/]
-  [bold #D9834F]  ╚██╔╝  [/]
-  [dim #6B6B6B]   ██║   [/]
-  [dim #6B6B6B]   ╚═╝   [/]
+  [bold #D77757]██╗   ██╗[/]
+  [bold #D77757]╚██╗ ██╔╝[/]
+  [bold #EB9F7F] ╚████╔╝ [/]
+  [bold #EB9F7F]  ╚██╔╝  [/]
+  [dim #999999]   ██║   [/]
+  [dim #999999]   ╚═╝   [/]
 EOF
 ```
 
-## 2. Point Hermes at it
+The block above is kept identical to [`yucode.yaml`](yucode.yaml).
 
-In a running session:
+## 2. Apply the recommended TUI settings
 
-```
-/skin yucode
-```
-
-Or edit `~/.hermes/config.yaml`:
-
-```yaml
-display:
-  skin: yucode
-  interface: tui
-```
-
-## 3. Restart
+Back up the current Hermes config first:
 
 ```bash
-/exit
+cp ~/.hermes/config.yaml ~/.hermes/config.yaml.bak.$(date +%Y%m%d_%H%M%S)
+```
+
+Then apply YuCode:
+
+```bash
+hermes config set display.skin yucode
+hermes config set display.compact true
+hermes config set display.interface tui
+hermes config set display.show_reasoning true
+hermes config set display.tool_progress all
+hermes config set display.sections.thinking collapsed
+hermes config set display.sections.tools collapsed
+hermes config set display.tui_status_indicator unicode
+```
+
+This keeps **Thinking** and **Tool Calls** visible in the chat, but collapsed by default. `tool_progress: all` preserves every tool lifecycle event; the TUI accordion handles the visual compactness instead of `new` mode suppressing repeated calls.
+
+The Unicode status indicator replaces the default rotating kawaii faces and novelty phrases with a minimal busy spinner.
+
+## 3. Restart Hermes
+
+Exit the current session and launch it again:
+
+```bash
 hermes
 ```
 
-The TUI picks up the colors immediately. The classic CLI banner only refreshes on next start. For a one-off classic CLI session: `hermes --cli`.
+A one-off classic CLI session is still available with:
+
+```bash
+hermes --cli
+```
 
 ---
 
-## When to use this
+## Skin-only install
 
-- **EOF (this file)** - just the skin, nothing else. Good when `config.yaml` is already configured and you only need the file dropped into place. Fast, no repo dependency.
-- **`install.sh`** - the skin **and** the display settings (`skin`, `compact: true`, `tool_progress: new`, `interface: tui`) applied at once, with a backup of `config.yaml`. Good for first install or when you want the full setup.
+If your `~/.hermes/config.yaml` is already exactly how you want it, stop after step 1 and select the skin manually:
 
-The content of the block above is identical to [`yucode.yaml`](yucode.yaml). If you prefer to copy from the file, see the [README](README.md) for the `install.sh` path.
+```text
+/skin yucode
+```
+
+## Full installer
+
+For normal installs and updates, the repository installer is easier because it performs the copy, backup and display configuration automatically:
+
+```bash
+git clone https://github.com/isyuricunha/yucode-theme.git
+cd yucode-theme
+./install.sh
+```
+
+See [`README.md`](README.md) for the complete documentation and palette reference.
