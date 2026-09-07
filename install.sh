@@ -32,7 +32,7 @@ cp "$CONFIG_FILE" "${CONFIG_FILE}.bak.$(date +%Y%m%d_%H%M%S)"
 # Prefer Hermes' own config writer. It understands nested dotted paths and
 # preserves the rest of the user's config without brittle YAML surgery.
 if command -v hermes >/dev/null 2>&1 && hermes config set display.skin yucode >/dev/null 2>&1; then
-    echo "applying Claude-like TUI settings"
+    echo "applying YuCode TUI settings"
     hermes config set display.compact true >/dev/null
     hermes config set display.interface tui >/dev/null
 
